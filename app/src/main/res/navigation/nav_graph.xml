@@ -8,5 +8,23 @@
         android:id="@+id/startFragment"
         android:name="com.example.cellgame.StartFragment"
         android:label="fragment_start"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_intructionsFragment"
+            app:destination="@id/intructionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/intructionsFragment"
+        android:name="com.example.cellgame.IntructionsFragment"
+        android:label="fragment_intructions"
+        tools:layout="@layout/fragment_intructions" >
+        <action
+            android:id="@+id/action_intructionsFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.cellgame.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" />
 </navigation>

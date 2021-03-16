@@ -24,6 +24,7 @@ public class GameFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     public GameFragment() {
         // Required empty public constructor
     }

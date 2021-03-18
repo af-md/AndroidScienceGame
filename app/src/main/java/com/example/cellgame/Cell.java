@@ -34,10 +34,10 @@ public class Cell extends Activity {
             x = x - move;
         }
 
-        Log.e("position", canvas.getWidth() + "   "  + x + "");
         image.setBounds((int) x, (int) y, (int) (x + width), (int) (y + height));
         image.draw(canvas);
     }
+
 
     private boolean isAbleToMove(Canvas canvas, float move) {
          // if (x + width < canvas.getWidth() || move > 0)

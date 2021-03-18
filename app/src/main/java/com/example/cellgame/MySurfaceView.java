@@ -3,16 +3,12 @@ package com.example.cellgame;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
@@ -22,6 +18,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
     boolean isRunning=true;
     Paint pWhite;
     Cell cell;
+    Pathogen pathogen;
 
     public void setMove(float move) {
         this.move = move;
@@ -37,9 +34,11 @@ public class MySurfaceView extends SurfaceView implements Runnable {
         myThread.start();
         myHolder = getHolder();
 
-        Drawable drawable
+        Drawable cellDrawable
                 = ContextCompat.getDrawable(context, R.drawable.game_cell);
-        cell = new Cell((Resources.getSystem().getDisplayMetrics().widthPixels / 2) - 100, Resources.getSystem().getDisplayMetrics().heightPixels - 200,drawable);
+        Drawable pathogenDrawable = ContextCompat.getDrawable(context, R.drawable.pathogen);
+        cell = new Cell((Resources.getSystem().getDisplayMetrics().widthPixels / 2) - 100, Resources.getSystem().getDisplayMetrics().heightPixels - 200,cellDrawable);
+        pathogen = new Pathogen(pathogenDrawable);
     }
 
     @Override
@@ -51,8 +50,14 @@ public class MySurfaceView extends SurfaceView implements Runnable {
             Canvas canvas = myHolder.lockCanvas();
             canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(), pWhite);
             cell.move(canvas, move);
+            if (!collisionDetected(cell.y - 200, pathogen.y, cell.x + cell.width, pathogen.x)) pathogen.move(canvas);
             myHolder.unlockCanvasAndPost(canvas);
         }
 
+    }
+
+    private boolean collisionDetected(float y, float v, float x, float x1) {
+        Log.e("y pos:", y + "  " + v);
+        return v > y && (x > x1 && x < x1 + 200 );
     }
 }

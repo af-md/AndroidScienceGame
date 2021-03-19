@@ -46,6 +46,7 @@ public class GameFragment extends Fragment {
 
         surfaceView = view.findViewById(R.id.surface_game_view);
 
+        // Get sensor
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 

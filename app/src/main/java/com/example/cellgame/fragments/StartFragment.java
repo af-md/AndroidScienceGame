@@ -80,6 +80,7 @@ public class StartFragment extends Fragment {
 
         playButton = view.findViewById(R.id.start_play_button);
 
+        // Moves to instruction fragment
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

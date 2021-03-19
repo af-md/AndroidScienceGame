@@ -78,6 +78,8 @@ public class IntructionsFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         playButton = view.findViewById(R.id.instruction_play_button);
+
+        // Moves to game fragment
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 import androidx.core.content.ContextCompat;
 
 import com.example.cellgame.R;
+import com.example.cellgame.controller.GameController;
 import com.example.cellgame.model.Cell;
 import com.example.cellgame.model.Pathogen;
 
@@ -23,6 +24,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
     Paint pWhite;
     Cell cell;
     Pathogen pathogen;
+    GameController gameController;
 
     public void setMove(float move) {
         this.move = move;
@@ -38,6 +40,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
         myThread.start();
         myHolder = getHolder();
 
+        gameController = new GameController();
         Drawable cellDrawable
                 = ContextCompat.getDrawable(context, R.drawable.game_cell);
         Drawable pathogenDrawable = ContextCompat.getDrawable(context, R.drawable.pathogen);

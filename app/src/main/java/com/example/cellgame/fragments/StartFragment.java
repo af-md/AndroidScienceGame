@@ -1,4 +1,4 @@
-package com.example.cellgame.view;
+package com.example.cellgame.fragments;
 
 import android.os.Bundle;
 

@@ -1,4 +1,4 @@
-package com.example.cellgame.view;
+package com.example.cellgame.fragments;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cellgame.R;
+import com.example.cellgame.view.GameSurfaceView;
 
 /**
  * A simple {@link Fragment} subclass.

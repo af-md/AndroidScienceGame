@@ -6,7 +6,7 @@
     app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.cellgame.StartFragment"
+        android:name="com.example.cellgame.view.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/intructionsFragment"
-        android:name="com.example.cellgame.IntructionsFragment"
+        android:name="com.example.cellgame.view.IntructionsFragment"
         android:label="fragment_intructions"
         tools:layout="@layout/fragment_intructions" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.cellgame.GameFragment"
+        android:name="com.example.cellgame.view.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" />
 </navigation>

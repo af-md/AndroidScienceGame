@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1BCBC"
-    tools:context=".GameFragment">
+    tools:context=".view.GameFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
 
         <view
             android:id="@+id/surface_game_view"
-            class="com.example.cellgame.MySurfaceView"
+            class="com.example.cellgame.view.GameSurfaceView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

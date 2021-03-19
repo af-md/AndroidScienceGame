@@ -1,4 +1,4 @@
-package com.example.cellgame;
+package com.example.cellgame.view;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -12,7 +12,11 @@ import android.view.SurfaceView;
 
 import androidx.core.content.ContextCompat;
 
-public class MySurfaceView extends SurfaceView implements Runnable {
+import com.example.cellgame.R;
+import com.example.cellgame.model.Cell;
+import com.example.cellgame.model.Pathogen;
+
+public class GameSurfaceView extends SurfaceView implements Runnable {
     SurfaceHolder myHolder;
     Thread myThread;
     boolean isRunning=true;
@@ -26,7 +30,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
     float move = 0f;
 
-    public MySurfaceView(Context context, AttributeSet attrs) {
+    public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         pWhite = new Paint();
         pWhite.setColor(getResources().getColor(R.color.game));
@@ -38,7 +42,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
                 = ContextCompat.getDrawable(context, R.drawable.game_cell);
         Drawable pathogenDrawable = ContextCompat.getDrawable(context, R.drawable.pathogen);
         cell = new Cell((Resources.getSystem().getDisplayMetrics().widthPixels / 2) - 100, Resources.getSystem().getDisplayMetrics().heightPixels - 200,cellDrawable);
-        pathogen = new Pathogen(pathogenDrawable);
+        pathogen = new Pathogen(300, 200, pathogenDrawable);
     }
 
     @Override
@@ -50,7 +54,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
             Canvas canvas = myHolder.lockCanvas();
             canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(), pWhite);
             cell.move(canvas, move);
-            if (!collisionDetected(cell.y - 200, pathogen.y, cell.x + cell.width, pathogen.x)) pathogen.move(canvas);
+            if (!collisionDetected(cell.getY() - 200, pathogen.getY(), cell.getX() + cell.getWidth(), pathogen.getY())) pathogen.move(canvas);
             myHolder.unlockCanvasAndPost(canvas);
         }
 

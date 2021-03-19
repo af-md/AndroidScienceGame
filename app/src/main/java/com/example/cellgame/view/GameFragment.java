@@ -1,4 +1,4 @@
-package com.example.cellgame;
+package com.example.cellgame.view;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -11,10 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.cellgame.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +36,7 @@ public class GameFragment extends Fragment {
     private SensorManager sensorManager;
     private Sensor accelerometerSensor;
 
-    private MySurfaceView surfaceView;
+    private GameSurfaceView surfaceView;
 
 
     @Override

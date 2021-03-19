@@ -1,6 +1,8 @@
-package com.example.cellgame;
+package com.example.cellgame.controller;
 
 // This class's job is to direct the movement of the cell based on the input of the cell
-public class CellController {
+public class GameController {
+
+
 
 }

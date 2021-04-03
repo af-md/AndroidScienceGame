@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_startFragment_to_intructionsFragment"
             app:destination="@id/intructionsFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_leaderBoardFragment"
+            app:destination="@id/leaderBoardFragment" />
     </fragment>
     <fragment
         android:id="@+id/intructionsFragment"
@@ -27,4 +30,9 @@
         android:name="com.example.cellgame.fragments.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" />
+    <fragment
+        android:id="@+id/leaderBoardFragment"
+        android:name="com.example.cellgame.fragments.LeaderBoardFragment"
+        android:label="fragment_leader_board"
+        tools:layout="@layout/fragment_leader_board" />
 </navigation>

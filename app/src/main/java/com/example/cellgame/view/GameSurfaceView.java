@@ -101,7 +101,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
         for (GameObj gameObj: gameObjs)
             if (gameObj instanceof PredatoryCell) gameObj.move(canvas, move, pWhite);
             else {
-                if (!collisionDetected(gameObjs.get(0).getY() - gameObjs.get(0).getHeight(), gameObj.getY(), gameObjs.get(0).getX() + gameObjs.get(0).getWidth(), gameObj.getX(),gameObj.getX() + gameObj.getWidth())) {
+                if (!collisionDetected(gameObjs.get(0).getY() - gameObjs.get(0).getHeight(), gameObj.getY(), gameObjs.get(0).getX() + gameObjs.get(0).getWidth(), gameObjs.get(0).getX() , gameObj.getX(),gameObj.getX() + gameObj.getWidth())) {
                     gameObj.move(canvas);
                 }
                 else {
@@ -140,9 +140,8 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
      * @param collidedObjXPosPlusWidth
      * @return
      */
-    private boolean collisionDetected(float playerYPosMinusHeight, float collidedObjYPos, float playerXPosPlusWidth, float collidedObjXPos, float collidedObjXPosPlusWidth) {
-
-        return hasCollidedOnYAxis(playerYPosMinusHeight, collidedObjYPos) && hasCollidedOnXAxis(playerXPosPlusWidth, collidedObjXPos, collidedObjXPosPlusWidth);
+    private boolean collisionDetected(float playerYPosMinusHeight, float collidedObjYPos, float playerXPosPlusWidth, float playerXPosition, float collidedObjXPos, float collidedObjXPosPlusWidth) {
+        return hasCollidedOnYAxis(playerYPosMinusHeight, collidedObjYPos) && hasCollidedOnXAxis(playerXPosPlusWidth, playerXPosition, collidedObjXPos, collidedObjXPosPlusWidth);
     }
 
     /**
@@ -151,8 +150,16 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
      * @param collidedObjXPosPlusWidth
      * @return true if the collision has happened on the X axis of the objects
      */
-    private boolean hasCollidedOnXAxis(float playerXPosPlusWidth, float collidedObjXPos, float collidedObjXPosPlusWidth) {
+    private boolean hasCollidedOnXAxis(float playerXPosPlusWidth, float playerXPosition, float collidedObjXPos, float collidedObjXPosPlusWidth) {
+        return verticalRightHandSideCollision(playerXPosPlusWidth, collidedObjXPos, collidedObjXPosPlusWidth) || verticalLeftHandSideCollision(playerXPosition, collidedObjXPos, collidedObjXPosPlusWidth);
+    }
+
+    private boolean verticalRightHandSideCollision(float playerXPosPlusWidth, float collidedObjXPos, float collidedObjXPosPlusWidth) {
         return playerXPosPlusWidth > collidedObjXPos && playerXPosPlusWidth < collidedObjXPosPlusWidth;
+    }
+
+    private boolean verticalLeftHandSideCollision(float playerXPosition, float collidedObjXPos, float collidedObjXPosPlusWidth) {
+        return playerXPosition < collidedObjXPosPlusWidth && playerXPosition > collidedObjXPos;
     }
 
     /**

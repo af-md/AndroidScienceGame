@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.cellgame.R;
 import com.example.cellgame.view.GameSurfaceView;
@@ -38,12 +39,13 @@ public class GameFragment extends Fragment {
     private Sensor accelerometerSensor;
 
     private GameSurfaceView surfaceView;
+    TextView healthTextView;
+    TextView pointsTextView;
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         surfaceView = view.findViewById(R.id.surface_game_view);
 
         // Get sensor
@@ -65,6 +67,18 @@ public class GameFragment extends Fragment {
 
         // Register the event listeners to the sensor
         sensorManager.registerListener(sensorEventListener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+
+        // set Health Bar
+        healthTextView = view.findViewById(R.id.health_text_view);
+        healthTextView.setText("5");
+        surfaceView.setHealthTextView(healthTextView);
+
+        // set Points bar
+        pointsTextView = view.findViewById(R.id.points_text_view);
+        pointsTextView.setText("0");
+        surfaceView.setPointsTextView(pointsTextView);
     }
 
     public GameFragment() {

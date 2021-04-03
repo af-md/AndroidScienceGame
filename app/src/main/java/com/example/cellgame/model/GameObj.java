@@ -1,6 +1,7 @@
 package com.example.cellgame.model;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -18,16 +19,32 @@ public class GameObj {
     public GameObj(float x, float y, Drawable image) {
         this.x = x;
         this.y = y;
+        this.initialHorizontalPosition = x;
+        initialVerticalPosition = y;
         this.image = image;
     }
 
-    /**
-     * The X.
-     */
-    protected float x, /**
-     * The Y.
-     */
-    y;
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    protected float x, y;
+    protected float initialHorizontalPosition;
+
+    public float getInitialHorizontalPosition() {
+        return initialHorizontalPosition;
+    }
+
+    public float getInitialVerticalPosition() {
+        return initialVerticalPosition;
+    }
+
+    protected float initialVerticalPosition;
+
 
     /**
      * Gets width.
@@ -93,7 +110,7 @@ public class GameObj {
      * @param canvas the canvas
      * @param move   the move
      */
-    public void move(Canvas canvas, float move) {
+    public void move(Canvas canvas, float move, Paint paint) {
     }
 
     /**

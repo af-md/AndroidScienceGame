@@ -2,12 +2,40 @@ package com.example.cellgame.model;
 
 import android.app.Activity;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
+
+import org.w3c.dom.Text;
 
 /**
  * The type Cell.
  */
-public class Cell extends GameObj {
+public class PredatoryCell extends GameObj {
+
+
+    private int health = 5;
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    private int points = 0;
 
     /**
      * Instantiates a new Cell.
@@ -16,7 +44,7 @@ public class Cell extends GameObj {
      * @param y     the y
      * @param image the image
      */
-    public Cell(float x, float y, Drawable image) {
+    public PredatoryCell(float x, float y, Drawable image) {
         super(x, y, image);
     }
 
@@ -26,14 +54,19 @@ public class Cell extends GameObj {
      * @param canvas the canvas
      * @param move   the move
      */
-    public void move(Canvas canvas, float move)
+    public void move(Canvas canvas, float move, Paint paint)
     {
+        drawHealth(canvas, paint);
         if (isAbleToMove(canvas, move)){
             x = x - move;
         }
 
         image.setBounds((int) x, (int) y, (int) (x + width), (int) (y + height));
         image.draw(canvas);
+    }
+
+    private void drawHealth(Canvas canvas, Paint paint) {
+
     }
 
     /**

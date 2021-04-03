@@ -1,12 +1,9 @@
 package com.example.cellgame.model;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.widget.Switch;
 
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.example.cellgame.R;
 
@@ -33,14 +30,22 @@ public class Factory {
      */
     public GameObj CreateObject(float x, float y, String discriminator, Context context){
         switch (discriminator){
-            case "Cell":
+            case "PredatoryCell":
                 Drawable cellDrawable
-                        = ContextCompat.getDrawable(context, R.drawable.game_cell);
-                return new Cell(x,y,cellDrawable);
+                        = ContextCompat.getDrawable(context, R.drawable.predatory_cell);
+                return new PredatoryCell(x,y,cellDrawable);
             case "Pathogen":
                 Drawable pathogenDrawable
                         = ContextCompat.getDrawable(context, R.drawable.pathogen);
                 return new Pathogen(x,y,pathogenDrawable);
+            case "RedBloodCell":
+                Drawable redBloodCellDrawable =
+                        ContextCompat.getDrawable(context, R.drawable.red_blood_cell);
+                return new RedBloodCells(x, y, redBloodCellDrawable);
+            case "WhiteBloodCell":
+                Drawable whiteBloodCellDrawable =
+                        ContextCompat.getDrawable(context, R.drawable.white_blood_cell_);
+                return new WhiteBloodCell(x, y, whiteBloodCellDrawable);
         };
         return null;
     }

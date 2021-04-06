@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavAction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -17,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.cellgame.PlayerViewModel;
 import com.example.cellgame.R;
 import com.example.cellgame.model.Player;
 
@@ -79,12 +81,16 @@ public class LeaderBoardFragment extends Fragment {
     Button retryButton;
     Button exitButton;
     NavController navController;
+
+    // player data
+    PlayerViewModel playerViewModel;
+    Player player;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         TableLayout leaderBoard = view.findViewById(R.id.ledear_board);
-        populateLeaderBoard(leaderBoard);
 
         navController = Navigation.findNavController(view);
         // button
@@ -107,6 +113,12 @@ public class LeaderBoardFragment extends Fragment {
                 System.exit(0);
             }
         });
+
+        // get live data
+        playerViewModel = new ViewModelProvider(requireActivity()).get(PlayerViewModel.class);
+        player = playerViewModel.getMyModel().getValue();
+
+        populateLeaderBoard(leaderBoard);
 
     }
 
@@ -143,6 +155,7 @@ public class LeaderBoardFragment extends Fragment {
         playersData.add( new Player("Ali", "4"));
         playersData.add( new Player("Jonny", "3"));
         playersData.add( new Player("Dario", "7"));
+        playersData.add(player);
         return playersData;
     }
 

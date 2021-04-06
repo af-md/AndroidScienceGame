@@ -29,7 +29,11 @@
         android:id="@+id/gameFragment"
         android:name="com.example.cellgame.fragments.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_gameFragment_to_leaderBoardFragment"
+            app:destination="@id/leaderBoardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/leaderBoardFragment"
         android:name="com.example.cellgame.fragments.LeaderBoardFragment"

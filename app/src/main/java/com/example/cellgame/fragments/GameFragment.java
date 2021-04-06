@@ -1,6 +1,10 @@
 package com.example.cellgame.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.drm.DrmEvent;
+import android.drm.DrmManagerClient;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,13 +14,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.cellgame.PlayerViewModel;
 import com.example.cellgame.R;
+import com.example.cellgame.model.Player;
 import com.example.cellgame.view.GameSurfaceView;
 
 /**
@@ -42,12 +55,18 @@ public class GameFragment extends Fragment {
     TextView healthTextView;
     TextView pointsTextView;
 
+    // player data
+    PlayerViewModel playerViewModel;
+    Player player;
+
+    NavController navController;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        surfaceView = view.findViewById(R.id.surface_game_view);
 
+        surfaceView = view.findViewById(R.id.surface_game_view);
         // Get sensor
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -69,6 +88,15 @@ public class GameFragment extends Fragment {
         sensorManager.registerListener(sensorEventListener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
 
+        // move to leaderboard fragment once the game has ended
+        navController = Navigation.findNavController(view);
+        Observer<Boolean> observeGameEnd = new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                navController.navigate(R.id.action_gameFragment_to_leaderBoardFragment);
+            }
+        };
+        surfaceView.setObserveGameEnd(observeGameEnd);
 
         // set Health Bar
         healthTextView = view.findViewById(R.id.health_text_view);
@@ -79,6 +107,11 @@ public class GameFragment extends Fragment {
         pointsTextView = view.findViewById(R.id.points_text_view);
         pointsTextView.setText("0");
         surfaceView.setPointsTextView(pointsTextView);
+
+        // get live data
+        playerViewModel = new ViewModelProvider(requireActivity()).get(PlayerViewModel.class);
+        player = playerViewModel.getMyModel().getValue();
+        surfaceView.setPlayer(player);
     }
 
     public GameFragment() {

@@ -5,15 +5,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.cellgame.PlayerViewModel;
 import com.example.cellgame.R;
+import com.example.cellgame.model.Player;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +37,11 @@ public class IntructionsFragment extends Fragment {
     private String mParam2;
     private NavController navController;
     private Button playButton;
+    private EditText userName;
+
+    // player data
+    PlayerViewModel playerViewModel;
+    Player player;
 
     public IntructionsFragment() {
         // Required empty public constructor
@@ -79,12 +89,25 @@ public class IntructionsFragment extends Fragment {
 
         playButton = view.findViewById(R.id.instruction_play_button);
 
+        userName = view.findViewById(R.id.editTextTextPersonName);
+
+        playerViewModel = new ViewModelProvider(requireActivity()).get(PlayerViewModel.class);
+        player = playerViewModel.getMyModel().getValue();
+
         // Moves to game fragment
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_intructionsFragment_to_gameFragment);
+                if (userName.getText().toString().trim().equals("")){
+                    userName.setError("please enter your name");
+                }
+                else {
+                    player.setName(userName.getText().toString());
+                    navController.navigate(R.id.action_intructionsFragment_to_gameFragment);
+                }
+
             }
         });
+
     }
 }

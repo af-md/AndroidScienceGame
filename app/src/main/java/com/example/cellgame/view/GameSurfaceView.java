@@ -1,18 +1,23 @@
 package com.example.cellgame.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
+
+import androidx.lifecycle.Observer;
 
 import com.example.cellgame.R;
 import com.example.cellgame.model.Factory;
 import com.example.cellgame.model.GameObj;
 import com.example.cellgame.model.Pathogen;
+import com.example.cellgame.model.Player;
 import com.example.cellgame.model.PredatoryCell;
 import com.example.cellgame.model.RedBloodCells;
 import com.example.cellgame.model.WhiteBloodCell;
@@ -49,6 +54,18 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
      */
     ArrayList<GameObj> gameObjs = new ArrayList<GameObj>();
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    private Player player;
+
+    public void setObserveGameEnd(Observer<Boolean> observeGameEnd) {
+        this.observeGameEnd = observeGameEnd;
+    }
+
+    // move to other fragment
+    Observer<Boolean> observeGameEnd;
 
     public GameSurfaceView(Context context, AttributeSet attrs) throws InterruptedException {
         super(context, attrs);
@@ -73,6 +90,12 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
             control(canvas, move);
             myHolder.unlockCanvasAndPost(canvas);
         }
+
+        // interrupt the thread
+        myThread.interrupt();
+
+        // move to the leader board
+        observeGameEnd.onChanged(true);
     }
 
 
@@ -86,7 +109,6 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
         gameObjs.add(factory.CreateObject(300, -1400, "Pathogen" , context));
         gameObjs.add(factory.CreateObject(800, 0, "RedBloodCell", context));
         gameObjs.add(factory.CreateObject(500, -800, "WhiteBloodCell", context));
-
         // health bar creation
     }
 
@@ -110,6 +132,12 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
                     // check health and points of the Predatory Cell
                     PredatoryCell predatoryCell = (PredatoryCell) gameObjs.get(0);
 
+                    if (predatoryCell.getHealth() == 4){
+                        player.setScore(Integer.toString(predatoryCell.getPoints()));
+                        isRunning = false;
+                        break;
+                    }
+
                     // remove health if collision occurred with pathogen
                     if (gameObj instanceof Pathogen){
                         predatoryCell.setHealth(predatoryCell.getHealth() - 1);
@@ -122,6 +150,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
                         pointsTextView.setText(Integer.toString(predatoryCell.getPoints()));
                     }
                     // reset axis coordinates
+
                     resetInitial(gameObj);
                 }
 
@@ -183,4 +212,6 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
     public void setPointsTextView(TextView pointsTextView) {
         this.pointsTextView = pointsTextView;
     }
+
+
 }

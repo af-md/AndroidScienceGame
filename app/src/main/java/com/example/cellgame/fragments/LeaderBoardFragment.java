@@ -83,7 +83,7 @@ public class LeaderBoardFragment extends Fragment {
 
     private void populateLeaderBoard(TableLayout leaderBoard) throws FileNotFoundException {
 
-        Scanner read = new Scanner (new File("..\\database\\scores.txt"));
+        Scanner read = new Scanner (new File("..\\database\\scores"));
         read.useDelimiter(",");
 
         while (read.hasNextLine())

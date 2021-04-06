@@ -5,52 +5,131 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1BCBC"
     tools:context=".fragments.IntructionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="731dp"
-        android:background="#F1BCBC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instructions"
+        android:text="@string/instructions"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="292dp"
-        android:layout_height="441dp"
-        android:text="Write the instuctions here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <Button
         android:id="@+id/instruction_play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play"
+        android:text="@string/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.89" />
+
+    <ScrollView
+        android:id="@+id/instructions_scroll_view"
+        android:layout_width="334dp"
+        android:layout_height="453dp"
+        app:layout_constraintBottom_toTopOf="@+id/instruction_play_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/scroll_view_textView2"
+                android:layout_width="match_parent"
+                android:layout_height="267dp"
+                android:text="Welcome to the Basic Cell Survive Game.\n\nThis game will teach you what a cell consumes in order to survive.\n\nPoints will be gained by consuming white and red blood cells.\n\nIf a Pathogen is consumed, you will lose 1 health.\n\nCells are the basic building blocks of all living things. The human body is composed of trillions of cells.\n\nThey provide structure for the body, take in nutrients from food, convert those nutrients into energy, and carry out specialized functions.\n\nCells also contain the body’s hereditary material and can make copies of themselves. \n\n Below image of a cell." />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/predatory_cell" />
+
+            <TextView
+                android:id="@+id/scrollview_textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To survive, every cell must have a constant supply of vital substances such as sugar, minerals, and oxygen, and dispose of waste products, all carried back and forth by the blood cells, such as white and red blood cells.\n\nThe main job of red blood cells, represented in the image below, is to carry oxygen from the lungs to the body tissues and carbon dioxide as a waste product, away from the tissues and back to the lungs.;" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/red_blood_cell" />
+
+            <TextView
+                android:id="@+id/scroll_view_textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="White blood cells, as shown in the image above, are part of the body's immune system. They help the body fight infection and other diseases." />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/white_blood_cell_" />
+
+            <TextView
+                android:id="@+id/scrollview_textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A pathogen brings disease to its host. Another name for a pathogen is an infectious agent, as they cause infections." />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pathogen" />
+
+            <TextView
+                android:id="@+id/scrollview_textView10"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:text="In this game you will have to absorb nutrients and protection from white and red blood cells and avoid the pathogens.\n\nThe more red and white blood cells your absorb, the more survival points you will gain. \n\nPathogen consumptions is the opposite, you will loose health point. You will be given 5 health points, if you don't avoid the pathogens you could kill the cell." />
+
+            <TextView
+                android:id="@+id/scrollview_textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/emoji"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/instructionview_textview"
+        android:layout_width="209dp"
+        android:layout_height="49dp"
+        android:gravity="center"
+        android:text="Scroll to view full instructions"
+        android:textAllCaps="true"
+        android:textColor="#CF0F0F"
+        android:textColorHighlight="#D81313"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/instructions_scroll_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

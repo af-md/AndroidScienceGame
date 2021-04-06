@@ -5,4 +5,7 @@
     <string name="health">HEALTH:</string>
     <string name="points">POINTS:</string>
     <string name="date">Date</string>
+    <string name="play">Play</string>
+    <string name="instructions">Instructions</string>
+    <string name="emoji">Good luck &#128522;</string>
 </resources>

@@ -43,6 +43,7 @@
                     android:layout_margin="1dp"
                     android:background="#FFFFFF"
                     android:gravity="center"
+                    android:paddingLeft="50"
                     android:text=" SCORE "
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textStyle="bold" />

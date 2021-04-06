@@ -5,20 +5,26 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavAction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.cellgame.R;
+import com.example.cellgame.model.Player;
 
 import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -69,35 +75,75 @@ public class LeaderBoardFragment extends Fragment {
         }
     }
 
+
+    Button retryButton;
+    Button exitButton;
+    NavController navController;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         TableLayout leaderBoard = view.findViewById(R.id.ledear_board);
-        try {
-            populateLeaderBoard(leaderBoard);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        populateLeaderBoard(leaderBoard);
+
+        navController = Navigation.findNavController(view);
+        // button
+        retryButton = view.findViewById(R.id.ledearboard_button_retry);
+        exitButton = view.findViewById(R.id.ledearboard_button_exit);
+
+        // navigate to game for retry
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_leaderBoardFragment_to_gameFragment);
+            }
+        });
+
+        // quit the application
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                System.exit(0);
+            }
+        });
+
+    }
+
+    private void populateLeaderBoard(TableLayout leaderBoard) {
+
+        ArrayList<Player> playersData = populatePlayers();
+
+        for (Player data: playersData){
+
+            // create the row
+            TableRow tableRow = new TableRow(getContext());
+
+            // create views to sit in the row
+            TextView textViewName = new TextView(getContext());
+            TextView textViewScore = new TextView(getContext());
+
+            // populate row
+            textViewName.setText(data.getName());
+            textViewScore.setText(data.getScore());
+
+            // set padding
+            textViewName.setPadding(60,0,0,0);
+            textViewScore.setPadding(300,0,0,0);
+
+            tableRow.addView(textViewName);
+            tableRow.addView(textViewScore);
+
+            leaderBoard.addView(tableRow);
         }
     }
 
-    private void populateLeaderBoard(TableLayout leaderBoard) throws FileNotFoundException {
-
-        Scanner read = new Scanner (new File("..\\database\\scores"));
-        read.useDelimiter(",");
-
-        while (read.hasNextLine())
-        {
-            TableRow tableRow = new TableRow(getContext());
-            while (read.hasNext())
-            {
-                TextView textView = new TextView(getContext());
-                textView.setText(read.next());
-                tableRow.addView(textView);
-            }
-            leaderBoard.addView(tableRow);
-        }
-        read.close();
+    private ArrayList<Player> populatePlayers() {
+        ArrayList<Player> playersData = new ArrayList<Player>();
+        playersData.add( new Player("Ali", "4"));
+        playersData.add( new Player("Jonny", "3"));
+        playersData.add( new Player("Dario", "7"));
+        return playersData;
     }
 
     @Override

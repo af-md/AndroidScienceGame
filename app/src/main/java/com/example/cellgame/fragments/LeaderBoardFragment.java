@@ -91,20 +91,35 @@ public class LeaderBoardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TableLayout leaderBoard = view.findViewById(R.id.ledear_board);
+        // get live data
+        playerViewModel = new ViewModelProvider(requireActivity()).get(PlayerViewModel.class);
+        player = playerViewModel.getMyModel().getValue();
+
+        populateLeaderBoard(leaderBoard);
 
         navController = Navigation.findNavController(view);
         // button
         retryButton = view.findViewById(R.id.ledearboard_button_retry);
         exitButton = view.findViewById(R.id.ledearboard_button_exit);
 
-        // navigate to game for retry
-        retryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_leaderBoardFragment_to_gameFragment);
-            }
-        });
+        if (player.getName() == null){
+            retryButton.setText("INSTRUCTIONS");
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    navController.navigate(R.id.action_leaderBoardFragment_to_intructionsFragment);
+                }
+            });
+        } else {
+            // navigate to game for retry
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    navController.navigate(R.id.action_leaderBoardFragment_to_gameFragment);
+                }
+            });
 
+        }
         // quit the application
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,12 +128,6 @@ public class LeaderBoardFragment extends Fragment {
                 System.exit(0);
             }
         });
-
-        // get live data
-        playerViewModel = new ViewModelProvider(requireActivity()).get(PlayerViewModel.class);
-        player = playerViewModel.getMyModel().getValue();
-
-        populateLeaderBoard(leaderBoard);
 
     }
 

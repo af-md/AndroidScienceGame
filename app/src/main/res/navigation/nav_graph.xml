@@ -42,5 +42,8 @@
         <action
             android:id="@+id/action_leaderBoardFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_leaderBoardFragment_to_intructionsFragment"
+            app:destination="@id/intructionsFragment" />
     </fragment>
 </navigation>

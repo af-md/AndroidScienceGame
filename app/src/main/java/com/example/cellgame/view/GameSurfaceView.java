@@ -132,7 +132,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
                     // check health and points of the Predatory Cell
                     PredatoryCell predatoryCell = (PredatoryCell) gameObjs.get(0);
 
-                    if (predatoryCell.getHealth() == 4){
+                    if (predatoryCell.getHealth() == 0){
                         player.setScore(Integer.toString(predatoryCell.getPoints()));
                         isRunning = false;
                         break;

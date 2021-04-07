@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Cell Game</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Cell Survival Game</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="health">HEALTH:</string>
     <string name="points">POINTS:</string>

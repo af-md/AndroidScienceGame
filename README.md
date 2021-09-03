@@ -1,1 +1,1 @@
-# Science based game developed to learn android development
+# Science based game developed to learn android development.
